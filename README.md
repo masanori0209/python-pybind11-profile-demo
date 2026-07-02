@@ -53,21 +53,6 @@ python-pybind11-profile-demo/
 ├── src/textscore_cpp.cpp    # pybind11 実装
 ├── scripts/
 │   ├── run_cprofile.py
-│   ├── benchmark.py
-│   └── capture-media.sh     # 記事用スクショ生成
+│   └── benchmark.py
 └── reports/                 # 計測ログ（git 管理外）
-```
-
-## 記事用メディアの生成
-
-Zenn 記事用のターミナル PNG を生成します（Pillow が必要）。
-
-```bash
-./scripts/capture-media.sh
-```
-
-デフォルトでは `/Users/m_m/develop/9999_m2lab/m-zenn-dev/images` に出力します。別ディレクトリへ出す場合:
-
-```bash
-ZENN_IMAGES_DIR=/path/to/images ./scripts/capture-media.sh
 ```
