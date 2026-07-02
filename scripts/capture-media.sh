@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 WORK="${ROOT}/.media-build"
-IMG_DIR="${ZENN_IMAGES_DIR:-/Users/m_m/develop/9999_m2lab/m-zenn-dev/images}"
+IMG_DIR="${ZENN_IMAGES_DIR:?Set ZENN_IMAGES_DIR to the Zenn images directory}"
 PYTHON="${ZENN_MEDIA_PYTHON:-python3}"
 
 if ! "$PYTHON" -c "from PIL import Image" 2>/dev/null; then
@@ -25,6 +25,10 @@ PY="${DEMO_VENV}/bin/python"
 
 mkdir -p "$WORK" "$IMG_DIR"
 
+sanitize_paths() {
+  sed -e "s|${ROOT}|.|g" -e "s|${HOME}|~|g"
+}
+
 render_png() {
   local textfile="$1"
   local outfile="$2"
@@ -35,10 +39,10 @@ capture_cprofile() {
   local f="${WORK}/cprofile.txt"
   {
     echo "\$ python scripts/run_cprofile.py --chunks 3000 --top 8"
-    "$PY" "${ROOT}/scripts/run_cprofile.py" --chunks 3000 --top 8 --output "${WORK}/profile-python-3000.txt"
+    "$PY" "${ROOT}/scripts/run_cprofile.py" --chunks 3000 --top 8 --output "${WORK}/profile-python-3000.txt" | sanitize_paths
     echo
-    echo "\$ head -n 12 ${WORK}/profile-python-3000.txt"
-    head -n 12 "${WORK}/profile-python-3000.txt"
+    echo "\$ head -n 12 reports/profile-python-3000.txt"
+    head -n 12 "${WORK}/profile-python-3000.txt" | sanitize_paths
   } > "$f"
   render_png "$f" "${IMG_DIR}/python-pybind11-demo-cprofile.png"
 }

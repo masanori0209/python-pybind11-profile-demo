@@ -2,7 +2,7 @@
 
 RAG のチャンク再ランキングを想定した、**cProfile → pybind11 で 1 関数 C++ 化** の最小デモです。
 
-解説記事（Zenn）: （公開後に URL を追記）
+解説記事（Zenn）: https://zenn.dev/masanori0209/articles/python-cprofile-pybind11
 
 > **Note:** 本番 RAG の精度比較ではありません。合成チャンクに対する文字 n-gram Jaccard の再ランキングで、計測と C++ 化の手順を再現するためのローカル実験用です。
 
