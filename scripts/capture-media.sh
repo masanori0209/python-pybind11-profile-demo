@@ -26,7 +26,9 @@ PY="${DEMO_VENV}/bin/python"
 mkdir -p "$WORK" "$IMG_DIR"
 
 render_png() {
-  "$PYTHON" "${ROOT}/scripts/render_terminal_png.py" "$1" "$2"
+  local textfile="$1"
+  local outfile="$2"
+  "$PYTHON" "${ROOT}/scripts/render_terminal_png.py" "$textfile" "$outfile"
 }
 
 capture_cprofile() {
@@ -38,7 +40,7 @@ capture_cprofile() {
     echo "\$ head -n 12 ${WORK}/profile-python-3000.txt"
     head -n 12 "${WORK}/profile-python-3000.txt"
   } > "$f"
-  render_png "${IMG_DIR}/python-pybind11-demo-cprofile.png" "$f"
+  render_png "$f" "${IMG_DIR}/python-pybind11-demo-cprofile.png"
 }
 
 capture_benchmark() {
@@ -47,7 +49,7 @@ capture_benchmark() {
     echo "\$ python scripts/benchmark.py --chunks 10000 --rounds 5"
     "$PY" "${ROOT}/scripts/benchmark.py" --chunks 10000 --rounds 5 --output "${WORK}/benchmark-10000.txt"
   } > "$f"
-  render_png "${IMG_DIR}/python-pybind11-demo-benchmark.png" "$f"
+  render_png "$f" "${IMG_DIR}/python-pybind11-demo-benchmark.png"
 }
 
 cd "$ROOT"
