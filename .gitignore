@@ -1,0 +1,9 @@
+.venv/
+reports/
+.media-build/
+.media-venv/
+__pycache__/
+*.egg-info/
+build/
+dist/
+_skbuild/
